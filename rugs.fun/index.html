@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Rugs</title>
+    <!-- Material Symbols: https://fonts.google.com/icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0..1,0..200" />
+
+    <!-- Initial loading styles -->
+    <style>
+        #initial-loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #15161d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+
+        #initial-loading-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        #initial-loading-logo {
+            max-width: 200px;
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        }
+
+        #initial-progress-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        #initial-progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #initial-progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, #713F12, #ffc700);
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.3s ease;
+            position: relative;
+        }
+
+        #initial-progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 20px;
+            height: 100%;
+            background: linear-gradient(to right, transparent, #ffc700);
+            border-radius: 0 4px 4px 0;
+            box-shadow: 0 0 10px #ffc700, 0 0 20px #ffc700, 0 0 30px #ffc700;
+            opacity: 0.8;
+        }
+    </style>
+    <script type="module" crossorigin src="/assets/index-BXd-Ar6x.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/react-vendor-1qCqAHqt.js">
+    <link rel="modulepreload" crossorigin href="/assets/mui-vendor-DDV5n_UM.js">
+    <link rel="modulepreload" crossorigin href="/assets/solana-vendor-E3c5Mf0a.js">
+    <link rel="modulepreload" crossorigin href="/assets/pixi-vendor-CD9TR_py.js">
+    <link rel="modulepreload" crossorigin href="/assets/utils-vendor-Dn72NG2i.js">
+    <link rel="modulepreload" crossorigin href="/assets/state-vendor-Cp_ttFKi.js">
+    <link rel="modulepreload" crossorigin href="/assets/auth-vendor-XDJ1EvAC.js">
+    <link rel="modulepreload" crossorigin href="/assets/animation-vendor-C681kfcm.js">
+    <link rel="modulepreload" crossorigin href="/assets/network-vendor-Buc8jffk.js">
+    <link rel="modulepreload" crossorigin href="/assets/telemetry-otel-Vuk-WXgZ.js">
+    <link rel="modulepreload" crossorigin href="/assets/telemetry-instrumentation-C5ME_rQh.js">
+    <link rel="modulepreload" crossorigin href="/assets/telemetry-otel-exporters-DO3Ni7sE.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-DkVQQwTJ.css">
+</head>
+
+<body>
+    <!-- Initial loading screen that shows immediately -->
+    <div id="initial-loading">
+        <div id="initial-loading-content">
+            <img id="initial-loading-logo" src="/rugsfun_combination_mark.png" alt="Rugs.fun Logo" />
+            <div id="initial-progress-container">
+                <div id="initial-progress-bar">
+                    <div id="initial-progress-fill"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="root"></div>
+    <div id="modal-root"></div>
+
+    <!-- Initial progress simulation and React loading transition -->
+    <script>
+        let initialProgress = 0;
+        const initialProgressFill = document.getElementById('initial-progress-fill');
+
+        // Simulate initial progress for basic page loading
+        function updateInitialProgress() {
+            if (initialProgress < 30) {
+                initialProgress += Math.random() * 5;
+                if (initialProgressFill) {
+                    initialProgressFill.style.width = Math.min(initialProgress, 30) + '%';
+                }
+                setTimeout(updateInitialProgress, 100);
+            }
+        }
+
+        // Start initial progress simulation
+        updateInitialProgress();
+
+        // Global function for React to update progress
+        window.updateLoadingProgress = function(progress) {
+            if (initialProgressFill) {
+                initialProgressFill.style.width = progress + '%';
+            }
+        };
+
+        // Remove initial loading screen once React loads
+        window.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                const initialLoading = document.getElementById('initial-loading');
+                const reactLoading = document.querySelector('.loading-page');
+
+                if (initialLoading && reactLoading) {
+                    // Transfer the current progress to React loading
+                    const currentProgress = initialProgress;
+
+                    // Fade out initial loading
+                    initialLoading.style.transition = 'opacity 0.3s ease-out';
+                    initialLoading.style.opacity = '0';
+                    setTimeout(() => initialLoading.remove(), 300);
+                }
+            }, 100);
+        });
+    </script>
+    <!-- Cloudflare Pages Analytics -->
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "8654f2873c6f4efd8adfdc2ae21240e0"}'></script>
+    <!-- Cloudflare Pages Analytics -->
+</body>
+
+</html>
